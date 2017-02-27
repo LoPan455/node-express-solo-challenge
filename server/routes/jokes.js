@@ -18,11 +18,12 @@ var jokes = [
   }
 ];
 
-
+// returns the array of Jokes
 router.get('/', function(req,res){
   res.send(jokes);
 });
 
+//pushes a user-submitted joke to the array
 router.post('/submit',function(req,res){
   jokes.push(req.body);
   console.log('a new joke has been submitted.  the current array is: ',jokes);

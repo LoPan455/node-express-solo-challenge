@@ -1,27 +1,23 @@
 //start
-var myName = '';
-var myJoke = '';
-var myPunchline ='';
+var myName = ''; //stores user input for name
+var myJoke = ''; //stores user input for the joke
+var myPunchline =''; // stores user input for the punchline
 
 $(document).ready(function() {
-  console.log('jquery loaded');
-
   writeJokesToDom();
-
-
   //listener for the new joke submission form
   $('#submitButton').on('click',function(){
-    console.log('submit button clicked!');
+    //picks up user input and stores them as variables
     myName = $('#myName').val();
     myJoke = $('#myJoke').val();
     myPunchline = $('#myPunchline').val();
-    console.log('myName: ', myName, 'myJoke: ', myJoke,'myPunchline:',myPunchline);
+    //creates the the object to send to the server
     var newJoke = {
       whoseJoke: myName,
       jokeQuestion: myJoke,
       punchLine: myPunchline
     };
-    console.log('newJoke is now: ',newJoke);
+    //sends the object off to the server
     $.ajax({
       type: 'POST',
       url: 'jokes/submit',
@@ -30,18 +26,12 @@ $(document).ready(function() {
         console.log(response);
       }
     })//end POST
-    //re-write to the DOM
 
+    //refresh the DOM with all the jokes
     writeJokesToDom();
+    //clears out the input fields and variables to prepare for a new joke submission
     clearOutFieldsAndVariables();
-
-
-
-
   });//end Listener
-
-
-
 
 }); // end document. ready
 
@@ -51,8 +41,6 @@ function writeJokesToDom(){
     type: "GET",
     url: "/jokes",
     success: function(response){
-      console.log('server response is: ',response);
-      console.log('the length of the response is: ',response.length);
       for (var i = 0; i < response.length; i++) {
         var whoseName = response[i].whoseJoke;
         var jokeQuestion = response[i].jokeQuestion;
