@@ -36,9 +36,15 @@ app.get('/', function(req, res) {
 
 });
 
+//routes
 app.get('/jokes', function(req,res){
   res.send(jokes);
-})
+});
+
+app.post('/submit',function(req,res){
+  jokes.push(req.body);
+  console.log('a new joke has been submitted.  the current array is: ',jokes);
+});
 
 // Start the server!
 app.listen(port, function() {
