@@ -8,30 +8,13 @@ $(document).ready(function() {
 
   writeJokesToDom();
 
-  // //loads all the jokes upon page load
-  // $.ajax({
-  //   type: "GET",
-  //   url: "/jokes",
-  //   success: function(response){
-  //     console.log('server response is: ',response);
-  //     console.log('the length of the response is: ',response.length);
-  //     for (var i = 0; i < response.length; i++) {
-  //       var whoseName = response[i].whoseJoke;
-  //       var jokeQuestion = response[i].jokeQuestion;
-  //       var punchLine = response[i].punchLine;
-  //       $('#jokesDisplay').append('<p>Joke Author: '+whoseName+'</p>');
-  //       $('#jokesDisplay').append('<p>The Joke : '+jokeQuestion+'</p>');
-  //       $('#jokesDisplay').append('<p>Joke Punchline: '+punchLine+'</p>');
-  //     } // end FOR loop
-  //   }//end suxcess function
-  // });//end ajax for /jokes
 
   //listener for the new joke submission form
   $('#submitButton').on('click',function(){
     console.log('submit button clicked!');
-    var myName = $('#myName').val();
-    var myJoke = $('#myJoke').val();
-    var myPunchline = $('#myPunchline').val();
+    myName = $('#myName').val();
+    myJoke = $('#myJoke').val();
+    myPunchline = $('#myPunchline').val();
     console.log('myName: ', myName, 'myJoke: ', myJoke,'myPunchline:',myPunchline);
     var newJoke = {
       whoseJoke: myName,
@@ -49,6 +32,10 @@ $(document).ready(function() {
     })//end POST
     //re-write to the DOM
 
+    writeJokesToDom();
+    clearOutFieldsAndVariables();
+
+
 
 
   });//end Listener
@@ -59,6 +46,7 @@ $(document).ready(function() {
 }); // end document. ready
 
 function writeJokesToDom(){
+  $('#jokesDisplay').empty();
   $.ajax({
     type: "GET",
     url: "/jokes",
@@ -75,6 +63,16 @@ function writeJokesToDom(){
       } // end FOR loop
     }//end suxcess function
   });//end ajax for /jokes
-}
+}// end function codeblock
+
+function clearOutFieldsAndVariables(){
+  $('#myName').val('');
+  $('#myJoke').val('');
+  $('#myPunchline').val('');
+  myName = '';
+  myJoke = '';
+  myPunchline ='';
+}//end function codeblock
+
 
 // end script
