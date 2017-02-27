@@ -44,6 +44,7 @@ app.get('/jokes', function(req,res){
 app.post('/submit',function(req,res){
   jokes.push(req.body);
   console.log('a new joke has been submitted.  the current array is: ',jokes);
+  res.sendStatus(200)
 });
 
 // Start the server!
