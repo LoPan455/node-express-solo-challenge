@@ -4,6 +4,7 @@ var myJoke = ''; //stores user input for the joke
 var myPunchline =''; // stores user input for the punchline
 
 $(document).ready(function() {
+  //writes whatever we have for the collection of jokes to the DOM
   writeJokesToDom();
   //listener for the new joke submission form
   $('#submitButton').on('click',function(){
@@ -45,9 +46,9 @@ function writeJokesToDom(){
         var whoseName = response[i].whoseJoke;
         var jokeQuestion = response[i].jokeQuestion;
         var punchLine = response[i].punchLine;
-        $('#jokesDisplay').append('<p>Joke Author: '+whoseName+'</p>');
-        $('#jokesDisplay').append('<p>The Joke : '+jokeQuestion+'</p>');
-        $('#jokesDisplay').append('<p>Joke Punchline: '+punchLine+'</p>');
+        $('#jokesDisplay').append('<h3>Joke Author: ' + whoseName + '</h3>');
+        $('#jokesDisplay').append('<p>The Joke: '+ jokeQuestion + '</p>');
+        $('#jokesDisplay').append('<p>Joke Punchline: ' + punchLine + '</p>');
       } // end FOR loop
     }//end suxcess function
   });//end ajax for /jokes
