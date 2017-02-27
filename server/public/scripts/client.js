@@ -24,7 +24,7 @@ $(document).ready(function() {
     console.log('newJoke is now: ',newJoke);
     $.ajax({
       type: 'POST',
-      url: '/submit',
+      url: 'jokes/submit',
       data: newJoke,
       success: function(response){
         console.log(response);

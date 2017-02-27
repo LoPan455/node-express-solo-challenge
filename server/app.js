@@ -3,30 +3,32 @@ var app = express();
 var bodyParser = require('body-parser');
 var path = require('path');
 var port = 3000;
+var jokes = require( './routes/jokes.js')
 
 
 // initial jokes provided by the client
-var jokes = [
-  {
-    whoseJoke: "Luke",
-    jokeQuestion: "Friends are like snow flakes...",
-    punchLine: "If you pee on them they disappear."
-  },
-  {
-    whoseJoke: "Kris",
-    jokeQuestion: "How many software engineers does it take to change a lightbulb?",
-    punchLine: "None! That's a hardware problem!"
-  },
-  {
-    whoseJoke: "Scott",
-    jokeQuestion: "Went to the zoo the other day. It only had one dog in it.",
-    punchLine: "It was shih tzu."
-  }
-];
+// var jokes = [
+//   {
+//     whoseJoke: "Luke",
+//     jokeQuestion: "Friends are like snow flakes...",
+//     punchLine: "If you pee on them they disappear."
+//   },
+//   {
+//     whoseJoke: "Kris",
+//     jokeQuestion: "How many software engineers does it take to change a lightbulb?",
+//     punchLine: "None! That's a hardware problem!"
+//   },
+//   {
+//     whoseJoke: "Scott",
+//     jokeQuestion: "Went to the zoo the other day. It only had one dog in it.",
+//     punchLine: "It was shih tzu."
+//   }
+// ];
 
 // static file requests
 app.use(express.static('server/public'));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use('/jokes',jokes); //added for the router
 // routes
 
 
@@ -37,15 +39,15 @@ app.get('/', function(req, res) {
 });
 
 //routes
-app.get('/jokes', function(req,res){
-  res.send(jokes);
-});
+// app.get('/jokes', function(req,res){
+//   res.send(jokes);
+// });
 
-app.post('/submit',function(req,res){
-  jokes.push(req.body);
-  console.log('a new joke has been submitted.  the current array is: ',jokes);
-  res.sendStatus(200)
-});
+// app.post('/submit',function(req,res){
+//   jokes.push(req.body);
+//   console.log('a new joke has been submitted.  the current array is: ',jokes);
+//   res.sendStatus(200);
+// });
 
 // Start the server!
 app.listen(port, function() {
